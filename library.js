@@ -54,7 +54,7 @@ function displayBooks() {
     }
 }
 
-addBookToLibrary("The Hobbit", "J.R.R Tolkein", "fantasy", 300, false);
+addBookToLibrary("The Hobbit", "J.R.R Tolkein", "fantasy", 300, true);
 addBookToLibrary("1984", "George Orwell", "dystopian-fiction", 368, false);
 addBookToLibrary("Neuromancer", "Willian Gibson", "science-fiction", 304, false);
 addBookToLibrary("War and Peace", "Leo Tolstoy", "historical-fiction", 1400, false);
