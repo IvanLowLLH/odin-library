@@ -1,12 +1,12 @@
 const myLibrary = []
 
-function Book(id, title, author, genre, num_pages, read) {
+function Book(id, title, author, genre, num_pages, status) {
     this.id = id;
     this.title = title;
     this.author = author;
     this.genre = genre
     this.num_pages = num_pages;
-    this.read = read;
+    this.status = status;
     // this.info = function () {
     //     let read_str = ""
     //     if (this.read) {
@@ -30,10 +30,7 @@ function displayBooks() {
     for (let index = 0; index < myLibrary.length; index++) {
         console.log(`${index}`)
         let book = myLibrary[index];
-        let book_status = "Not Read";
-        if (book.read){
-            book_status = "Read"
-        }
+
         const new_card = document.createElement("div");
         new_card.setAttribute("id", book.id);
         new_card.classList.add("book-card");
@@ -47,17 +44,17 @@ function displayBooks() {
         </div>
         <div class="book-bottom">
             <p class="book-pages">${book.num_pages} pages</p>
-            <p class="book-status">${book_status}</p>
+            <p class="book-status">${book.status}</p>
         </div>
         `;
         book_container.appendChild(new_card);
     }
 }
 
-addBookToLibrary("The Hobbit", "J.R.R Tolkein", "fantasy", 300, true);
-addBookToLibrary("1984", "George Orwell", "dystopian-fiction", 368, false);
-addBookToLibrary("Neuromancer", "Willian Gibson", "science-fiction", 304, false);
-addBookToLibrary("War and Peace", "Leo Tolstoy", "historical-fiction", 1400, false);
+addBookToLibrary("The Hobbit", "J.R.R Tolkein", "fantasy", 300, "Read");
+addBookToLibrary("1984", "George Orwell", "dystopian-fiction", 368, "Not Read");
+addBookToLibrary("Neuromancer", "Willian Gibson", "science-fiction", 304, "Not Read");
+addBookToLibrary("War and Peace", "Leo Tolstoy", "historical-fiction", 1400, "Not Read");
 displayBooks();
 
 const dialog = document.querySelector("dialog");
