@@ -11,6 +11,12 @@ html {
     width: 100%;
 }
 
+.header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .book-cards-container {
     width: 75%;
     border: 1px solid black;
@@ -37,4 +43,16 @@ html {
     display: flex;
     justify-content: space-between;
     padding: 0 10px;
+}
+
+
+.add-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-buttons {
+    display: flex;
+    justify-content: space-between;
 }
