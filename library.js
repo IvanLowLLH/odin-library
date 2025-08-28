@@ -58,8 +58,26 @@ addBookToLibrary("War and Peace", "Leo Tolstoy", "historical-fiction", 1400, "No
 displayBooks();
 
 const dialog = document.querySelector("dialog");
-const showButton = document.querySelector("dialog + button");
+const showButton = document.querySelector("#add-button");
+const form = document.querySelector(".add-form");
+
+const titleInput = document.getElementById("book-title-form");
+const authorInput = document.getElementById("book-author-form");
+const genreInput = document.getElementById("book-genre-form");
+const pagesInput = document.getElementById("book-pages-form");
+const readInput = document.querySelector('input[name="book-read"]:checked');
+
 // "Show the dialog" button opens the dialog modally
 showButton.addEventListener("click", () => {
     dialog.showModal();
+});
+
+document.getElementById("confirm-btn").addEventListener("click", (e) => {
+    e.preventDefault();
+
+    const readValue = readInput ? readInput.value : null;
+    addBookToLibrary(titleInput.value, authorInput.value, genreInput.value, pagesInput.value, readValue)
+    displayBooks()
+
+    console.log("confirmed"); // do something with it
 });
