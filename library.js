@@ -1,4 +1,5 @@
 const myLibrary = []
+const book_container = document.querySelector(".book-cards-container");
 
 function Book(id, title, author, genre, num_pages, status) {
     this.id = id;
@@ -26,9 +27,11 @@ function addBookToLibrary(title, author, genre, num_pages, read) {
 }
 
 function displayBooks() {
-    const book_container = document.querySelector(".book-cards-container");
+    // Clear display first
+    while (book_container.firstChild) {
+        book_container.removeChild(book_container.firstChild);
+    }
     for (let index = 0; index < myLibrary.length; index++) {
-        console.log(`${index}`)
         let book = myLibrary[index];
 
         const new_card = document.createElement("div");
