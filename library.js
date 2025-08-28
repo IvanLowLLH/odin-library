@@ -30,49 +30,26 @@ function displayBooks() {
     for (let index = 0; index < myLibrary.length; index++) {
         console.log(`${index}`)
         let book = myLibrary[index];
+        let book_status = "Not Read";
+        if (book.read){
+            book_status = "Read"
+        }
         const new_card = document.createElement("div");
         new_card.setAttribute("id", book.id);
         new_card.classList.add("book-card");
         
-        // book-top
-        const new_card_top = document.createElement("div");
-        new_card_top.classList.add("book-top");
-        const book_title = document.createElement("h1");
-        book_title.textContent = book.title;
-        book_title.classList.add("book-title");
-        const by = document.createElement("p");
-        by.textContent = "by";
-        const book_author = document.createElement("h2");
-        book_author.textContent = book.author;
-        book_author.classList.add("book-author");
-        const book_genre = document.createElement("p");
-        book_genre.textContent = book.genre;
-        book_genre.classList.add("book-genre");
-        new_card_top.appendChild(book_title);
-        new_card_top.appendChild(by);
-        new_card_top.appendChild(book_author);
-        new_card_top.appendChild(book_genre);
-
-        // book-bottom
-        const new_card_bottom = document.createElement("div");
-        new_card_bottom.classList.add("book-bottom");
-        const book_pages = document.createElement("p");
-        book_pages.textContent = `${book.num_pages} pages`;
-        book_pages.classList.add("book-pages");
-        const book_read = document.createElement("p");
-        if (book.read) {
-            book_read.textContent = "Read";
-        }
-        else {
-            book_read.textContent = "Not Read";
-        }
-        book_read.classList.add("book-status");
-        new_card_bottom.appendChild(book_pages);
-        new_card_bottom.appendChild(book_read);
-
-        new_card.appendChild(new_card_top);
-        new_card.appendChild(new_card_bottom);
-
+        new_card.innerHTML = `
+        <div class="book-top">
+            <h1 class="book-title">${book.title}</h1>
+            <p>by</p>
+            <h2 class="book-author">${book.author}</h2>
+            <p class="book-genre">${book.genre}</p>
+        </div>
+        <div class="book-bottom">
+            <p class="book-pages">${book.num_pages} pages</p>
+            <p class="book-status">${book_status}</p>
+        </div>
+        `;
         book_container.appendChild(new_card);
     }
 }
