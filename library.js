@@ -59,3 +59,10 @@ addBookToLibrary("1984", "George Orwell", "dystopian-fiction", 368, false);
 addBookToLibrary("Neuromancer", "Willian Gibson", "science-fiction", 304, false);
 addBookToLibrary("War and Peace", "Leo Tolstoy", "historical-fiction", 1400, false);
 displayBooks();
+
+const dialog = document.querySelector("dialog");
+const showButton = document.querySelector("dialog + button");
+// "Show the dialog" button opens the dialog modally
+showButton.addEventListener("click", () => {
+    dialog.showModal();
+});
