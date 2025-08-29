@@ -1,3 +1,12 @@
+@font-face {
+    font-family: 'Old London';
+    src: url('OldLondon.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+
 body,
 html {
     height: 100%;
@@ -16,6 +25,11 @@ html {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.header > h1 {
+    font-family: 'Old London';
+    font-size: 3.5em;
 }
 
 .book-cards-container {
