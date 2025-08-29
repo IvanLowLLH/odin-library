@@ -39,6 +39,8 @@ book_container.addEventListener("click", (event) => {
         if (book) {
             book.toggleStatus();
             target.textContent = book.status; // Directly update the button text
+            const book_card = target.closest(".book-card");
+            book_card.setAttribute('type', `${book.status}`);
         }
     }
 })
@@ -54,6 +56,7 @@ function renderNewBook(book) {
     const new_card = document.createElement("div");
     new_card.setAttribute("id", book.id);
     new_card.classList.add("book-card");
+    new_card.setAttribute('type', `${book.status}`);
 
     new_card.innerHTML = `
         <div class="book-top">
