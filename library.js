@@ -20,6 +20,11 @@ function Book(id, title, author, genre, num_pages, status) {
     // }
 }
 
+// Add a method on the prototype
+Book.prototype.toggleStatus = function () {
+    this.status = this.status === "Read" ? "Not Read" : "Read";
+};
+
 function addBookToLibrary(title, author, genre, num_pages, read) {
     let new_id = crypto.randomUUID();
     const new_book = new Book(new_id, title, author, genre, num_pages, read);
@@ -47,7 +52,7 @@ function displayBooks() {
         </div>
         <div class="book-bottom">
             <p class="book-pages">${book.num_pages} pages</p>
-            <p class="book-status">${book.status}</p>
+            <button class="book-status-btn" id="${book.id}">${book.status}</button>
             <button type="button" class="remove-book-btn" id="${book.id}">
                 <img class="trash-icon" src="trash-can-outline.svg">
             </button>
@@ -56,14 +61,23 @@ function displayBooks() {
         book_container.appendChild(new_card);
     }
     // Removal Button
-    const remove_buttons = document.querySelectorAll(".remove-book-btn")
+    const remove_buttons = document.querySelectorAll(".remove-book-btn");
     remove_buttons.forEach((remove_button) => {
         remove_button.addEventListener("click", () => {
-            console.log(remove_button.id);
             removeBook(remove_button.id);
             displayBooks();
         }
         )
+    })
+
+    // Removal Button
+    const status_buttons = document.querySelectorAll(".book-status-btn")
+    status_buttons.forEach((status_button) => {
+        status_button.addEventListener("click", () => {
+            updateBookStatus(status_button.id);
+            status_button.textContent = 
+            displayBooks();
+        })
     })
 }
 
@@ -74,8 +88,17 @@ function removeBook(remove_book_id) {
             myLibrary.splice(index, 1);
             break;
         }
+    }   
+}
+
+function updateBookStatus(update_book_id) {
+    for (let index = 0; index < myLibrary.length; index++) {
+        let book = myLibrary[index];
+        if (book.id === update_book_id) {
+            book.toggleStatus();
+            break;
+        }
     }
-    
 }
 
 addBookToLibrary("The Hobbit", "J.R.R Tolkein", "fantasy", 300, "Read");
