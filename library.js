@@ -48,6 +48,9 @@ function displayBooks() {
         <div class="book-bottom">
             <p class="book-pages">${book.num_pages} pages</p>
             <p class="book-status">${book.status}</p>
+            <button type="button" class="remove-book-btn">
+                <img class="trash-icon" src="trash-can-outline.svg">
+            </button>
         </div>
         `;
         book_container.appendChild(new_card);
