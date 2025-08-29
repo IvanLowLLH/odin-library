@@ -61,9 +61,9 @@ function renderNewBook(book) {
             <p>by</p>
             <h2 class="book-author">${book.author}</h2>
             <p class="book-genre">${book.genre}</p>
+            <p class="book-pages">${book.num_pages} pages</p>
         </div>
         <div class="book-bottom">
-            <p class="book-pages">${book.num_pages} pages</p>
             <button class="book-status-btn">${book.status}</button>
             <button type="button" class="remove-book-btn">
                 <img class="trash-icon" src="trash-can-outline.svg">
