@@ -31,6 +31,21 @@ function addBookToLibrary(title, author, genre, num_pages, read) {
     myLibrary.push(new_book);
 }
 
+book_container.addEventListener("click", (event) => {
+    const target = event.target;
+    const book_id = target.closest(".book-card")?.id; // returns null if can't find closest book-card
+
+    if (!book_id) return; // Click was not on a book card element
+
+    if (target.classList.contains("remove-book-btn") || target.closest(".remove-book-btn")) {
+        removeBook(book_id);
+        displayBooks();
+    } else if (target.classList.contains("book-status-btn")) {
+        updateBookStatus(book_id);
+        displayBooks();
+    }
+})
+
 function displayBooks() {
     // Clear display first
     while (book_container.firstChild) {
@@ -60,25 +75,6 @@ function displayBooks() {
         `;
         book_container.appendChild(new_card);
     }
-    // Removal Button
-    const remove_buttons = document.querySelectorAll(".remove-book-btn");
-    remove_buttons.forEach((remove_button) => {
-        remove_button.addEventListener("click", () => {
-            removeBook(remove_button.id);
-            displayBooks();
-        }
-        )
-    })
-
-    // Removal Button
-    const status_buttons = document.querySelectorAll(".book-status-btn")
-    status_buttons.forEach((status_button) => {
-        status_button.addEventListener("click", () => {
-            updateBookStatus(status_button.id);
-            status_button.textContent = 
-            displayBooks();
-        })
-    })
 }
 
 function removeBook(remove_book_id) {
