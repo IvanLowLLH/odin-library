@@ -8,28 +8,12 @@ function Book(id, title, author, genre, num_pages, status) {
     this.genre = genre
     this.num_pages = num_pages;
     this.status = status;
-    // this.info = function () {
-    //     let read_str = ""
-    //     if (this.read) {
-    //         read_str = "read";
-    //     }
-    //     else {
-    //         read_str = "not read yet";
-    //     }
-    //     return this.title + " by " + this.author + ", " + this.num_pages + " pages, " + read_str;
-    // }
 }
 
 // Add a method on the prototype
 Book.prototype.toggleStatus = function () {
     this.status = this.status === "Read" ? "Not Read" : "Read";
 };
-
-function addBookToLibrary(title, author, genre, num_pages, read) {
-    let new_id = crypto.randomUUID();
-    const new_book = new Book(new_id, title, author, genre, num_pages, read);
-    myLibrary.push(new_book);
-}
 
 book_container.addEventListener("click", (event) => {
     const target = event.target;
@@ -55,12 +39,16 @@ book_container.addEventListener("click", (event) => {
 function displayBooks() {
     for (let index = 0; index < myLibrary.length; index++) {
         let book = myLibrary[index];
+        renderNewBook(book);
+    }
+}
 
-        const new_card = document.createElement("div");
-        new_card.setAttribute("id", book.id);
-        new_card.classList.add("book-card");
-        
-        new_card.innerHTML = `
+function renderNewBook(book) {
+    const new_card = document.createElement("div");
+    new_card.setAttribute("id", book.id);
+    new_card.classList.add("book-card");
+
+    new_card.innerHTML = `
         <div class="book-top">
             <h1 class="book-title">${book.title}</h1>
             <p>by</p>
@@ -75,8 +63,7 @@ function displayBooks() {
             </button>
         </div>
         `;
-        book_container.appendChild(new_card);
-    }
+    book_container.appendChild(new_card);
 }
 
 function removeBook(remove_book_id) {
@@ -111,8 +98,10 @@ document.getElementById("confirm-btn").addEventListener("click", (e) => {
     e.preventDefault();
 
     const readInput = document.querySelector('input[name="book-read"]:checked');
-    addBookToLibrary(titleInput.value, authorInput.value, genreInput.value, pagesInput.value, readInput.value)
-    displayBooks()
+    let new_id = crypto.randomUUID();
+    const new_book = new Book(new_id, titleInput.value, authorInput.value, genreInput.value, pagesInput.value, readInput.value);
+    myLibrary.push(new_book);
+    renderNewBook(new_book)
 
     dialog.close();
 });
