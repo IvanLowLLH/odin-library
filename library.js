@@ -78,22 +78,16 @@ function displayBooks() {
 }
 
 function removeBook(remove_book_id) {
-    for (let index = 0; index < myLibrary.length; index++) {
-        let book = myLibrary[index];
-        if (book.id === remove_book_id) {
-            myLibrary.splice(index, 1);
-            break;
-        }
-    }   
+    const book_index = myLibrary.findIndex(book => book.id === remove_book_id);
+    if (book_index > -1) {
+        myLibrary.splice(book_index, 1);
+    }
 }
 
 function updateBookStatus(update_book_id) {
-    for (let index = 0; index < myLibrary.length; index++) {
-        let book = myLibrary[index];
-        if (book.id === update_book_id) {
-            book.toggleStatus();
-            break;
-        }
+    const book = myLibrary.find(book => book.id === update_book_id);
+    if (book) {
+        book.toggleStatus();
     }
 }
 
