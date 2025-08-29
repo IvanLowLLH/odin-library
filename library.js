@@ -48,13 +48,34 @@ function displayBooks() {
         <div class="book-bottom">
             <p class="book-pages">${book.num_pages} pages</p>
             <p class="book-status">${book.status}</p>
-            <button type="button" class="remove-book-btn">
+            <button type="button" class="remove-book-btn" id="${book.id}">
                 <img class="trash-icon" src="trash-can-outline.svg">
             </button>
         </div>
         `;
         book_container.appendChild(new_card);
     }
+    // Removal Button
+    const remove_buttons = document.querySelectorAll(".remove-book-btn")
+    remove_buttons.forEach((remove_button) => {
+        remove_button.addEventListener("click", () => {
+            console.log(remove_button.id);
+            removeBook(remove_button.id);
+            displayBooks();
+        }
+        )
+    })
+}
+
+function removeBook(remove_book_id) {
+    for (let index = 0; index < myLibrary.length; index++) {
+        let book = myLibrary[index];
+        if (book.id === remove_book_id) {
+            myLibrary.splice(index, 1);
+            break;
+        }
+    }
+    
 }
 
 addBookToLibrary("The Hobbit", "J.R.R Tolkein", "fantasy", 300, "Read");
