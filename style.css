@@ -67,6 +67,11 @@ html {
     align-items: center;
 }
 
+.book-card,
+.book-status-btn {
+    font-family: "Cormorant Garamond";
+}
+
 .book-bottom {
     display: flex;
     justify-content: space-between;
