@@ -15,6 +15,13 @@ Book.prototype.toggleStatus = function () {
     this.status = this.status === "Read" ? "Not Read" : "Read";
 };
 
+function addBookToLibrary(title, author, genre, num_pages, read) {
+    let new_id = crypto.randomUUID();
+    const new_book = new Book(new_id, title, author, genre, num_pages, read);
+    myLibrary.push(new_book);
+}
+
+
 book_container.addEventListener("click", (event) => {
     const target = event.target;
     const book_id = target.closest(".book-card")?.id; // returns null if can't find closest book-card
@@ -98,10 +105,8 @@ document.getElementById("confirm-btn").addEventListener("click", (e) => {
     e.preventDefault();
 
     const readInput = document.querySelector('input[name="book-read"]:checked');
-    let new_id = crypto.randomUUID();
-    const new_book = new Book(new_id, titleInput.value, authorInput.value, genreInput.value, pagesInput.value, readInput.value);
-    myLibrary.push(new_book);
-    renderNewBook(new_book)
+    addBookToLibrary(titleInput.value, authorInput.value, genreInput.value, pagesInput.value, readInput.value);
+    renderNewBook(myLibrary.at(-1))
 
     dialog.close();
 });
