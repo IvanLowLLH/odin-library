@@ -38,19 +38,21 @@ book_container.addEventListener("click", (event) => {
     if (!book_id) return; // Click was not on a book card element
 
     if (target.classList.contains("remove-book-btn") || target.closest(".remove-book-btn")) {
+        const cardToRemove = document.getElementById(book_id);
+        if (cardToRemove) {
+            cardToRemove.remove();
+        }
         removeBook(book_id);
-        displayBooks();
     } else if (target.classList.contains("book-status-btn")) {
-        updateBookStatus(book_id);
-        displayBooks();
+        const book = myLibrary.find(book => book.id === book_id);
+        if (book) {
+            book.toggleStatus();
+            target.textContent = book.status; // Directly update the button text
+        }
     }
 })
 
 function displayBooks() {
-    // Clear display first
-    while (book_container.firstChild) {
-        book_container.removeChild(book_container.firstChild);
-    }
     for (let index = 0; index < myLibrary.length; index++) {
         let book = myLibrary[index];
 
@@ -67,8 +69,8 @@ function displayBooks() {
         </div>
         <div class="book-bottom">
             <p class="book-pages">${book.num_pages} pages</p>
-            <button class="book-status-btn" id="${book.id}">${book.status}</button>
-            <button type="button" class="remove-book-btn" id="${book.id}">
+            <button class="book-status-btn">${book.status}</button>
+            <button type="button" class="remove-book-btn">
                 <img class="trash-icon" src="trash-can-outline.svg">
             </button>
         </div>
@@ -84,12 +86,6 @@ function removeBook(remove_book_id) {
     }
 }
 
-function updateBookStatus(update_book_id) {
-    const book = myLibrary.find(book => book.id === update_book_id);
-    if (book) {
-        book.toggleStatus();
-    }
-}
 
 addBookToLibrary("The Hobbit", "J.R.R Tolkein", "fantasy", 300, "Read");
 addBookToLibrary("1984", "George Orwell", "dystopian-fiction", 368, "Not Read");
